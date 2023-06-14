@@ -14,7 +14,7 @@ def tela_principal():
   print(books)
   table_values = books[:]
   #  cabeçalho da tabela
-  headers= ['Código', 'Título', 'Autor', 'Genero Literário', 'Indioma']
+  headers= ['Código', 'Título', 'Autor', 'Genero Literário', 'Idioma']
   layout = [
       [sg.Input(key='search', pad=((5, 5), 0), size=(20, 1)), sg.Button('Pesquisar', pad=((5, 215), 0)),
       sg.Button('Novo Livro'),
@@ -28,7 +28,7 @@ def tela_principal():
   while True:
       event, values = window.read()
       table = window['TABLE']
-     
+      
       if event == sg.WINDOW_CLOSED or event == 'Fechar':
         break
 
@@ -69,9 +69,6 @@ def tela_principal():
          else:
             sg.popup_ok('Nenhum registro selecionado. Selecione um registro para deletar.')
 
-
-        
-
 def tela_cadastro(table):
    layout_cadastro = [
       [sg.Text('CADASTRAR NOVO LIVRO')],
@@ -84,7 +81,7 @@ def tela_cadastro(table):
       [sg.Input(key='author', size=(50, 1))],
       [sg.Text('Genero Literário:')],
       [sg.Input(key='gen', size=(50, 1))],
-      [sg.Text('Indioma do Livro:')],
+      [sg.Text('Idioma do Livro:')],
       [sg.Input(key='linguage', size=(50, 1))],
       [sg.Button('Cadastrar'), sg.Button('Cancelar')]
    ]
@@ -107,17 +104,16 @@ def tela_cadastro(table):
          for data in new:
             if data == '':
                all_not_empty = False
-
-         if not all_not_empty:
-            sg.popup_ok('O registro não pode ter campos vazios.')
-         else:
+               
+         if all_not_empty:
             add_book(books, new)      
             # Atualizar tabela com a nova lista de books
             janela_cadastro.close()
             tela_principal()
             table.update(values=books)
             # Fechar a janela de cadastro
-
+         else:
+            sg.popup_ok('O registro não pode ter campos vazios.')
 
 def tela_editar(table, book):
     layout_editar = [
@@ -129,7 +125,7 @@ def tela_editar(table, book):
        [sg.Input(key='author', size=(50, 1), default_text=book[2])],
        [sg.Text('Genero Literário:')],
        [sg.Input(key='gen', size=(50, 1), default_text=book[3])],
-       [sg.Text('Indioma do Livro:')],
+       [sg.Text('Idioma do Livro:')],
        [sg.Input(key='linguage', size=(50, 1), default_text=book[4])],
        [sg.Button('Editar'), sg.Button('Cancelar')]
     ]

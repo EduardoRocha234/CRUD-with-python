@@ -1,5 +1,6 @@
 # funções 
-
+# quantos livros o autor tem na editora
+# quantos livros tem em cada livraria
 # books => é a matriz de livros
 # new_book => a lista com os novos livrso
 def add_book(books, new_book):
